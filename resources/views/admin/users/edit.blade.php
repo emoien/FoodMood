@@ -4,11 +4,12 @@
     <div class="col-md-9">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Create Account</h3>
+                <h3 class="card-title">Edit Account</h3>
             </div>
 
-            <form method="POST" action="{{route('users.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('users.update',$user)}}" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="first_name">First Name <span class="required-form">*</span></label>
@@ -17,7 +18,7 @@
                                name="first_name"
                                id="first_name"
                                placeholder="Enter Your First Name"
-                               value="{{ old('first_name') }}"
+                               value="{{ $user->first_name}}"
                                autofocus
                                required
                         >
@@ -33,7 +34,7 @@
                                name="last_name"
                                id="last_name"
                                placeholder="Enter Your Last Name"
-                               value="{{ old('last_name') }}"
+                               value="{{ $user->last_name }}"
                                autofocus
                                required
                         >
@@ -49,7 +50,7 @@
                                name="email"
                                id="email"
                                placeholder="Enter Your Email"
-                               value="{{ old('email') }}"
+                               value="{{ $user->email }}"
                                required
                         >
                         @error('email')
@@ -64,7 +65,7 @@
                                name="phone"
                                id="phone"
                                placeholder="Enter Your Phone"
-                               value="{{ old('phone') }}"
+                               value="{{ $user->phone }}"
                                autofocus
                                required
                         >
@@ -109,13 +110,13 @@
                                 required>
                             <option value="">Select</option>
                             <option value="1"
-                                    @if(old('role') == 1) selected @endif >Admin
+                                    @if($user->role == 1) selected @endif >Admin
                             </option>
                             <option value="2"
-                                    @if(old('role') == 2) selected @endif >Staff
+                                    @if($user->role  == 2) selected @endif >Staff
                             </option>
                             <option value="3"
-                                    @if(old('role') == 3) selected @endif >Chef
+                                    @if($user->role == 3) selected @endif >Chef
                             </option>
 
                         </select>

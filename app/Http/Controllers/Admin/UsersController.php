@@ -41,17 +41,24 @@ class UsersController extends Controller
     {
 
         $request->validate([
-            'name' => ['required', 'min:5', 'max:255'],
+            
+            'first_name' => ['required','string'],
+            'last_name' => ['required','string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required'],
+            'role' => ['required']
             
         ]);
 
          User::create([
-            'name' => $request->name,
+            
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'email_verified_at' => now(),
+            'phone' => $request->phone,
             'role' => $request->role
         ]);
 
@@ -97,18 +104,23 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => ['required', 'min:5', 'max:255'],
+            
+            'first_name' => ['required','string'],
+            'last_name' => ['required','string'],
             'password' => ['nullable', 'min:8'],
-            'is_active' => ['nullable', 'boolean']
+            'phone' => ['required']
+            
         ]);
 
-        $user->name = $request->name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         if (isset($request->password)) {
             $user->password = bcrypt($request->password);
         }
-        if (auth()->user()->isAdmin()) {
-            $user->status = $request->is_active;
-        }
+        
+        // if (auth()->user()->isAdmin()) {
+            // $user->status = $request->is_active;
+        // }
         $user->save();
         return redirect()->route('users.index')->with('success', 'User Updated Success');
     }
