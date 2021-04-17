@@ -11,10 +11,16 @@ class Category extends Model
 
     protected $guarded = [];
 
-    //name
-    //slug
-    //status boolen 1/0 active/inactive
-    //image
+
+
+  public function status()
+  {
+      return $this->status == 1 ? 'Active' : 'Inactive'; 
+  }
+
+   
+
+    
 
 
 }
