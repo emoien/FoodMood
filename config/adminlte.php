@@ -228,58 +228,36 @@ return [
         [
             'text' => 'HomePage',
             'url' => 'home',
+            'icon' => 'fas fa-fw fa-home',
 
         ],
 
-        [
-            'text' => 'Retail Order',
-            'url' => 'retail',
+        
+       
 
+        
+        
+        [
+            'text' => 'users',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Categories',
+            'url'  => 'categories',
+            'icon' => 'fas fa-fw fa-tag',
         ],
 
         [
-            'text' => 'Catering Order',
-            'url' => 'catering',
-
-        ],
-
-        [
-            'text' => 'Checkout',
-            'url' => 'checkout',
-
+            'text' => 'Products',
+            'url'  => 'products',
+            'icon' => 'fas fa-fw fa-tag',
         ],
         
-        // [
-        //     'text' => 'users',
-        //     'url'  => 'users',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
-        // [
-        //     'text' => 'Categories',
-        //     'url'  => 'categories',
-        //     'icon' => 'fas fa-fw fa-tag',
-        // ],
-        [
-            'text' => 'Become a Chef?',
-            'url' => 'chefForm',
-
-        ],
         
         // ['header' => 'account_settings'],
 
-        [
-            'text' => 'Need Help?',
-            'url'  => 'faq',
-        ],
-        [
-            'text' => 'About Us',
-            'url' => 'about',
-
-        ],[
-            'text' => 'Contact Us',
-            'url' => 'contact',
-
-        ],
+        
     ],
 
     /*
