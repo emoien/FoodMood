@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\ProductsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,13 @@ use App\Http\Controllers\Admin\CategoriesController;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/about', function () {
+//     return view('pages.about');
+// });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('users', UsersController::class);
 Route::resource('categories', CategoriesController::class);
+Route::resource('products',ProductsController::class);
