@@ -66,7 +66,9 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.view', [
+            'category' => $category
+        ]);
     }
 
     /**

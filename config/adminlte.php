@@ -106,7 +106,7 @@ return [
     'classes_auth_body' => 'bg-gradient-dark',
     'classes_auth_footer' => 'text-center',
     'classes_auth_icon' => 'text-light',
-    'classes_auth_btn' => 'btn-flat btn-light',
+    'classes_auth_btn' => 'btn-flat btn-dark',
 
     /*
     |--------------------------------------------------------------------------
@@ -238,7 +238,7 @@ return [
         
         
         [
-            'text' => 'users',
+            'text' => 'Users',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
         ],
@@ -255,7 +255,19 @@ return [
         ],
         
         
-        // ['header' => 'account_settings'],
+        // [
+        //     'header' => 'ACCOUNT SETTINGS',
+        // ],
+        // [
+        //     'text'  => 'Profile',
+        //     'route' => 'admin.profile',
+        //     'icon'  => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text'  => 'Change Password',
+        //     'route' => 'admin.password',
+        //     'icon'  => 'fas fa-fw fa-lock',
+        // ],
 
         
     ],

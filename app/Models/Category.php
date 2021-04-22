@@ -18,6 +18,16 @@ class Category extends Model
       return $this->status == 1 ? 'Active' : 'Inactive'; 
   }
 
+
+  public function user()
+  {
+      return $this->belongsto(User::class);
+  }
+
+  public function products()
+  {
+     return $this->HasMany(Product::class);
+  }
    
 
     

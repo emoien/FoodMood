@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use App\Models\ProductImage;
 
 class ProductsController extends Controller
 {
@@ -50,10 +51,10 @@ class ProductsController extends Controller
             'name' => ['required', 'min:3', 'max:256'],
             'description' => ['required', 'min:5', 'max:256'],
             'price' => ['required', 'min:1', 'max:256',],
-            'cover' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'cover' => ['required','image', 'mimes:jpeg,png,jpg', 'max:2048'],
            
         ]);
-        Product::create([
+       $product =  Product::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'cover' => $this->uploadImage($request->cover),
@@ -63,6 +64,8 @@ class ProductsController extends Controller
             'category_id' => $request->categories_id 
 
         ]);
+
+        $this->uploadImages($product, $request->images);
 
         return redirect()->route('products.index')->with('success', 'Product created Success');
         
@@ -76,7 +79,12 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        
+        return view('admin.products.view', [
+            'product' => $product->load('category','user')
+
+            // 'product' => $product->load('categories', 'images')
+        ]);
     }
 
     /**
@@ -116,6 +124,9 @@ class ProductsController extends Controller
         $product->cover = $this->uploadImage($request->image, $product->cover);
         $product->status = $request->status;
         $product->save();
+
+        $this->uploadImages($product, $request->images);
+        
         return redirect()->route('products.index')->with('success', 'Product updated Success');
     }
 
@@ -162,6 +173,38 @@ class ProductsController extends Controller
             return $imagePath;
         }
         
+
+    }
+
+    private function uploadImages($product, $images)
+    {
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                if (request()->method() == 'PATCH') {
+                    $product->images->each(function ($image) {
+                        $image->delete();
+                        Storage::disk('public')->delete('products/images/' . $image->path);
+                        Storage::disk('public')->delete('products/images/thumb/' . $image->path);
+                    });
+                }
+                $currentdate = Carbon::now()->toDateString();
+                $imagename = $currentdate . uniqid() . '.' . $image->getClientOriginalExtension();
+                if (!Storage::disk('public')->exists('products/images/')) {
+                    Storage::disk('public')->makeDirectory('products/images/');
+                }
+                $coverimage = Image::make($image)->stream();
+
+                if (!Storage::disk('public')->exists('products/images/thumb/')) {
+                    Storage::disk('public')->makeDirectory('products/images/thumb/');
+                }
+
+                $thumb = Image::make($image)->resize(100, 100)->stream();
+
+                Storage::disk('public')->put('products/images/thumb/' . $imagename, $thumb);
+                Storage::disk('public')->put('products/images/' . $imagename, $coverimage);
+                $product->images()->create(['path' => $imagename]);
+            }
+        }
 
     }
 }

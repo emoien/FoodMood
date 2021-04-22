@@ -51,7 +51,7 @@
                             style="width: 100%;">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}"
-                                {{ (collect(old('categories'))->contains($category->id)) ? 'selected':'' }}
+                                {{old('categories_id') == $category->id ? 'selected':'' }}
                             >{{$category->name}}</option>
                         @endforeach
                     </select>
@@ -80,6 +80,7 @@
                         <input type="file" class="form control @error('cover') is-invalid @enderror"
                                name="cover"
                                id="cover-image"
+                               required
                                onchange="document.getElementById('cover').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <img id="cover" src="{{asset("/images/logo.png")}}"
@@ -89,7 +90,7 @@
                     <span style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
-<!-- 
+
                 <div class="form-group">
                     <label>Select Multiple Images : </label><br>
                     <input id="file-input" type="file" multiple name="images[]" @error('images.*') is-invalid @enderror>
@@ -99,7 +100,7 @@
                     @error('images.*')
                     <span style="color: red">{{ $message }}</span>
                     @enderror
-                </div> -->
+                </div>
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>

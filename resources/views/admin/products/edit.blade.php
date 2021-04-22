@@ -85,8 +85,21 @@
                     </div>
                     <img id="cover" src="{{asset("/images/logo.png")}}"
                          height="100px" width="100px"><br>
+                         
 
                     @error('cover')
+                    <span style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                
+                <div class="form-group">
+                    <label>Select Multiple Images : </label><br>
+                    <input id="file-input" type="file" multiple name="images[]" @error('images.*') is-invalid @enderror>
+                    <div id="preview">
+                    </div>
+
+                    @error('images.*')
                     <span style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
@@ -108,17 +121,7 @@
                         <span style="color: red">{{ $message }}</span>
                         @enderror
                     </div>
-<!-- 
-                <div class="form-group">
-                    <label>Select Multiple Images : </label><br>
-                    <input id="file-input" type="file" multiple name="images[]" @error('images.*') is-invalid @enderror>
-                    <div id="preview">
-                    </div>
 
-                    @error('images.*')
-                    <span style="color: red">{{ $message }}</span>
-                    @enderror
-                </div> -->
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
