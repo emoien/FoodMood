@@ -48,7 +48,7 @@
                     <label for="category">Categories: <span class="required-form">*</span></label>
                     <select type="text" name="categories_id" id="category" required
                             class="form-control categories  @error('category') is-invalid @enderror"
-                        
+
                             style="width: 100%;">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}"
@@ -73,31 +73,38 @@
                     @enderror
                 </div>
 
-            
+
 
                 <div class="mb-2">
-                    <label for="cover-image">Image: </label>
+                    <label for="cover-image">Cover Image :</label>
                     <div class="form-group">
-                        <input type="file" class="form control @error('cover') is-invalid @enderror"
-                               name="cover"
-                               id="cover-image"
+                        <input type="file" class="form control" name="cover"
+                               value="{{old('cover')}}" id="cover-image"
                                onchange="document.getElementById('cover').src = window.URL.createObjectURL(this.files[0])">
                     </div>
-                    <img id="cover" src="{{asset("/images/logo.png")}}"
+                    <img id="cover"
+                         src="{{ $product->cover ? $product->getCoverThumb() : "/images/admin/preview.jpg"}}"
                          height="100px" width="100px"><br>
-                         
-
-                    @error('cover')
-                    <span style="color: red">{{ $message }}</span>
-                    @enderror
                 </div>
 
-                
+
                 <div class="form-group">
-                    <label>Select Multiple Images : </label><br>
+                    <label> Select Multiple Images :</label><br>
                     <input id="file-input" type="file" multiple name="images[]" @error('images.*') is-invalid @enderror>
                     <div id="preview">
                     </div>
+                    <br>
+                    @if($product->images->count())
+                        <div class="image-preview">
+                            @foreach($product->images as $image)
+                                <img id="images"
+                                     src="{{ $image->path ? $image->thumbPath() : "/images/admin/preview.jpg"}}"
+                                     height="100px" width="100px">
+                            @endforeach
+                            <br>
+                            <span style="color: red">If you upload new files old files will be deleted</span><br>
+                        </div>
+                    @endif
 
                     @error('images.*')
                     <span style="color: red">{{ $message }}</span>
@@ -114,7 +121,7 @@
                             </option>
                             <option value="0"
                                     @if($product->status  == 0) selected @endif >Inactive
-                            
+
 
                         </select>
                         @error('status')
@@ -163,7 +170,7 @@
             document.querySelector('#file-input').addEventListener("change", previewImages);
         });
 
-    
+
 
     </script>
 @endpush

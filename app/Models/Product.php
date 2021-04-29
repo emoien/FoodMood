@@ -16,7 +16,7 @@ class Product extends Model
 
     public function status()
   {
-      return $this->status == 1 ? 'Active' : 'Inactive'; 
+      return $this->status == 1 ? 'Active' : 'Inactive';
   }
 
   public function user()
@@ -36,7 +36,7 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function getCoverImage()
+    public function getCoverThumb()
     {
         return url('storage/thumb/' . $this->cover);
     }

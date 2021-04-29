@@ -51,11 +51,29 @@
 
                         <tr>
                             <td>Category</td>
-                            
+
                             <td>{{$product->category->name}}</td>
-                            
+
                         </tr>
-                        
+
+                        <tr>
+                            <td>Image</td>
+                            <td><img src="{{asset($product->getCoverThumb())}}" alt=""></td>
+                        </tr>
+
+                        <tr>
+                            <td>Images</td>
+                            @if($product->images->count())
+                                @foreach($product->images as $image)
+                                    <td>
+                                        <img src="{{$image->thumbPath()}}">
+                                    </td>
+                                @endforeach
+                            @else
+                                <td>No Images To preview</td>
+                            @endif
+                        </tr>
+
                     </table>
                     <hr>
                     <br>

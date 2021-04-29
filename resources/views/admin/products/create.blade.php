@@ -47,7 +47,7 @@
                     <label for="category">Categories: <span class="required-form">*</span></label>
                     <select type="text" name="categories_id" id="category" required
                             class="form-control categories  @error('category') is-invalid @enderror"
-                        
+
                             style="width: 100%;">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}"
@@ -72,7 +72,7 @@
                     @enderror
                 </div>
 
-            
+
 
                 <div class="mb-2">
                     <label for="cover-image">Image: </label>
@@ -83,7 +83,7 @@
                                required
                                onchange="document.getElementById('cover').src = window.URL.createObjectURL(this.files[0])">
                     </div>
-                    <img id="cover" src="{{asset("/images/logo.png")}}"
+                    <img id="cover" src="{{asset("/Images/logo.png")}}"
                          height="100px" width="100px"><br>
 
                     @error('cover')
@@ -142,7 +142,7 @@
             document.querySelector('#file-input').addEventListener("change", previewImages);
         });
 
-    
+
 
     </script>
 @endpush

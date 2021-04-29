@@ -44,9 +44,9 @@ class CategoriesController extends Controller
     {
 
         $request->validate([
-            'name' => ['required', 'min:5', 'max:256','unique'],
+            'name' => ['required', 'min:5', 'max:256','unique:categories,name'],
             'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-           
+
         ]);
 
         Category::create([
@@ -81,7 +81,7 @@ class CategoriesController extends Controller
     {
         return view('admin.categories.edit', [
             'category' => $category,
-        
+
         ]);
 
     }
@@ -98,7 +98,7 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => ['required', 'min:5', 'max:256','unique:categories,name,' . $category->id],
             'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-           
+
         ]);
 
         $category->name = $request->name;
@@ -116,7 +116,7 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
-    { 
+    {
         Storage::disk('public')->delete('images/' .$category->image);
         Storage::disk('public')->delete('thumb/' . $category->image);
         $category->delete();
@@ -155,9 +155,9 @@ class CategoriesController extends Controller
         } else {
             return $imagePath;
         }
-        
+
 
     }
 
-    
+
 }

@@ -34,13 +34,18 @@
                             <td>{{$category->slug}}</td>
                         </tr>
 
-                        
+
 
                         <tr>
                             <td>Status</td>
                             <td>{{$category->status == 1 ? 'Enabled' : 'Disabled'}}</td>
                         </tr>
-                        
+
+                        <tr>
+                            <td>Image</td>
+                            <td><img src="{{asset($category->getThumbImage())}}" alt=""></td>
+                        </tr>
+
 
                     </table>
                     <hr>

@@ -15,7 +15,7 @@ class Category extends Model
 
   public function status()
   {
-      return $this->status == 1 ? 'Active' : 'Inactive'; 
+      return $this->status == 1 ? 'Active' : 'Inactive';
   }
 
 
@@ -28,9 +28,21 @@ class Category extends Model
   {
      return $this->HasMany(Product::class);
   }
-   
 
-    
+    public function getThumbImage()
+    {
+        return $this->image ? url('storage/thumb/' . $this->image) : '/images/logo.png';
+    }
+
+
+    public function getImage()
+    {
+        return $this->image ? url('storage/images/' . $this->image) : '/images/logo.png';
+    }
+
+
+
+
 
 
 }
