@@ -57,7 +57,7 @@
                         </tr>
 
                         <tr>
-                            <td>Image</td>
+                            <td>Cover Image</td>
                             <td><img src="{{asset($product->getCoverThumb())}}" alt=""></td>
                         </tr>
 
@@ -73,6 +73,7 @@
                                 <td>No Images To preview</td>
                             @endif
                         </tr>
+                        
 
                     </table>
                     <hr>
@@ -80,10 +81,10 @@
                     <div class="card-footer clearfix" style="">
                         <a href="{{route('products.edit',[$product->id])}}"
                            class="btn btn-info  pull-left">
-                            {{__('Edit')}}</a>
+                            Edit</a>
 
                         <a href="{{route('products.index')}}"
-                           class="btn  btn-default pull-right">{{__('Back')}}</a>
+                           class="btn  btn-default pull-right">Back</a>
                     </div>
                 </div>
             </div>

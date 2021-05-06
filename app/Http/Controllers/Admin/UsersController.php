@@ -133,9 +133,10 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if (auth()->user()->isAdmin()) {
+        if (auth()->user()->userRole() == 'Admin') {
             $user->delete();
+            return redirect()->route('users.index')->with('deleted', 'User Deleted Success');
         }
-        Session::flash('danger', 'User Deleted Success.');
+        return redirect()->route('users.index')->with('deleted', 'User cannot be deleted');
     }
 }

@@ -18,8 +18,8 @@ use App\Http\Controllers\Admin\ProductsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.home');
+})->name('welcome');
 // Route::get('/about', function () {
 //     return view('pages.about');
 // });

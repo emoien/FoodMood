@@ -4,6 +4,7 @@
 
 
 @section('content')
+@include('admin.sharedViews.alertMessage')
     <div class="card">
         <div class="card-header card-primary">
             <div class="row">
@@ -24,6 +25,7 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Status</th>
+      <th scope="col">Action</th>
       
     </tr>
   </thead>
@@ -34,11 +36,28 @@
       <td>{{$category->name}} </td>
       <td>{{$category->status()}}</td>
       
+      <td> 
+            <a href="{{route('categories.edit',[$category])}}"
+               class="btn btn-sm btn-info mb-1"><i class="fa fa-pen"></i></a>
+             <a href="{{route('categories.show',[$category])}}"
+                class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
+                <form action="{{route('categories.destroy',[$category])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                  <button type="submit" class="btn btn-sm btn-danger delete mb-1"><i class="fa fa-trash"></i></button>
+                </form>
+
+
+      </td>
+      
     </tr>
     @endforeach
+   
 
   </tbody>
+  
 </table>
+{{$categories->links()}}
         </div>
     </div>
 

@@ -19,8 +19,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        
         return view('admin.categories.index',[
-            'categories' => Category::latest()->get()
+            'categories' => Category::latest()->paginate(5)
         ]);
     }
 
@@ -121,7 +122,7 @@ class CategoriesController extends Controller
         Storage::disk('public')->delete('thumb/' . $category->image);
         $category->delete();
 
-        Session::flash('danger', 'category Deleted Success.');
+        return redirect()->route('categories.index')->with('deleted', 'Category Deleted Success');
     }
 
     private function uploadImage($image, $imagePath = Null)

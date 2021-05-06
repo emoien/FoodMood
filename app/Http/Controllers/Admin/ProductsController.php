@@ -22,8 +22,9 @@ class ProductsController extends Controller
     public function index()
     {
         return view('admin.products.index',[
-            'products' => Product::latest()->get()
+            'products' => Product::latest()->paginate(10)
         ]);
+
     }
 
     /**
@@ -80,11 +81,11 @@ class ProductsController extends Controller
     public function show(Product $product)
     {
         
+        
         return view('admin.products.view', [
-            'product' => $product->load('category','user')
-
-            // 'product' => $product->load('categories', 'images')
+            'product' => $product->load('category','user','images')
         ]);
+
     }
 
     /**
@@ -138,7 +139,18 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        Storage::disk('public')->delete('images/' . $product->cover);
+        Storage::disk('public')->delete('thumb/' . $product->cover);
+
+        $product->images->each(function ($image) {
+            $image->delete();
+            Storage::disk('public')->delete('products/images/' . $image->path);
+            Storage::disk('public')->delete('products/images/thumb/' . $image->path);
+        });
+        return redirect()->route('products.index')->with('deleted', 'Product Deleted Success');
+
+
     }
 
     private function uploadImage($image, $imagePath = Null)

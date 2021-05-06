@@ -4,7 +4,8 @@
 
 
 @section('content')
-    <div class="card">
+   @include('admin.sharedViews.alertMessage')
+<div class="card">
         <div class="card-header card-primary">
             <div class="row">
                 <div class="col-sm-11 card-title">
@@ -26,23 +27,38 @@
       <th scope="col">Description</th>
       <th scope="col">Price</th>
       <th scope="col">Status</th>
+      <th scope="col">Action</th>
       
     </tr>
   </thead>
   <tbody>
-  @foreach($products as $product)
+  @foreach($products as $key => $product)
     <tr>
-      <th scope="row">{{$product->id}}</th>
+      <th scope="row">{{$key + 1}}</th>
       <td>{{$product->name}} </td>
       <td>{{$product->description}} </td>
       <td>{{$product->price}} </td>
       <td>{{$product->status()}}</td>
+      <td> 
+            <a href="{{route('products.edit',[$product])}}"
+               class="btn btn-sm btn-info mb-1"><i class="fa fa-pen"></i></a>
+             <a href="{{route('products.show',[$product])}}"
+                class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
+                <form action="{{route('products.destroy',[$product])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                  <button type="submit" class="btn btn-sm btn-danger delete mb-1"><i class="fa fa-trash"></i></button>
+                </form>
+
+
+      </td>
       
     </tr>
     @endforeach
 
   </tbody>
 </table>
+{{$products->links()}}
         </div>
     </div>
 
