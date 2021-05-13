@@ -73,7 +73,6 @@
                 </div>
 
 
-
                 <div class="mb-2">
                     <label for="cover-image">Image: </label>
                     <div class="form-group">
@@ -101,6 +100,21 @@
                     <span style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="status">Status <span class="required-form">*</span></label>
+                    <select name="status" id="status" class="form-control select2 @error('status') is-invalid @enderror"
+                            required>
+                        <option value="">Select</option>
+                        <option value="1" selected>Active</option>
+                        <option value="2">Catering</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    @error('status')
+                    <span style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
@@ -141,7 +155,6 @@
 
             document.querySelector('#file-input').addEventListener("change", previewImages);
         });
-
 
 
     </script>

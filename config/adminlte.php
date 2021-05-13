@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -193,7 +193,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -232,11 +232,6 @@ return [
 
         ],
 
-        
-       
-
-        
-        
         [
             'text' => 'Users',
             'url'  => 'users',
@@ -253,8 +248,8 @@ return [
             'url'  => 'products',
             'icon' => 'fas fa-fw fa-tag',
         ],
-        
-        
+
+
         // [
         //     'header' => 'ACCOUNT SETTINGS',
         // ],
@@ -269,7 +264,7 @@ return [
         //     'icon'  => 'fas fa-fw fa-lock',
         // ],
 
-        
+
     ],
 
     /*

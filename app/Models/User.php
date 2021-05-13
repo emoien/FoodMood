@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'phone',
         'role',
+        'status',
+        'image'
     ];
 
 
@@ -46,6 +48,11 @@ class User extends Authenticatable
     ];
 
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
     public function userRole()
     {
         $roles = [
@@ -57,5 +64,16 @@ class User extends Authenticatable
 
         return $roles[$this->role];
     }
-    
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function getImage()
+    {
+        return url('storage/users/' . $this->image);
+    }
+
+
 }

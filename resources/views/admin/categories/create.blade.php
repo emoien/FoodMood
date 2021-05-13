@@ -26,7 +26,6 @@
                         @enderror
                     </div>
 
-
                     <div class="mb-2">
                         <label for="cover-image">Image: </label>
                         <div class="form-group">
@@ -53,7 +52,6 @@
         @endsection
         @push('scripts')
             <script>
-
 
                 $(function () {
                     function previewImages() {

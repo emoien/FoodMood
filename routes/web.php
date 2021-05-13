@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Frontend\CategoryProductsController;
+use App\Http\Controllers\Frontend\ChefProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -17,12 +19,11 @@ use App\Http\Controllers\Admin\ProductsController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home');
-})->name('welcome');
-// Route::get('/about', function () {
-//     return view('pages.about');
-// });
+
+Route::get('/', \App\Http\Controllers\Frontend\HomeController::class)->name('welcome');
+Route::get('/category/{category:slug}',[CategoryProductsController::class,'index'])->name('category.products');
+Route::get('/chefs/{user:first_name}',[ChefProductsController::class,'index'])->name('chef.products');
+
 
 Auth::routes();
 

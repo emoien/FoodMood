@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('price');
             $table->string('cover');
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(1); // 0,1,2 for active inactive and catering
             $table->timestamps();
         });
     }

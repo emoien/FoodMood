@@ -26,8 +26,7 @@
                         <span style="color: red">{{ $message }}</span>
                         @enderror
                     </div>
-                    
-                    
+
 
                     <div class="form-group">
                         <label for="image">Upload Image <span class="required-form"></span></label>
@@ -36,7 +35,7 @@
                                name="image"
                                id="image"
                                value="{{$category->image}}"
-                                                     >
+                        >
                         @error('image')
                         <span style="color: red">{{ $message }}</span>
                         @enderror
@@ -44,7 +43,8 @@
 
                     <div class="form-group">
                         <label for="status">Status <span class="required-form">*</span></label>
-                        <select name="status" id="status" class="form-control select2 @error('status') is-invalid @enderror"
+                        <select name="status" id="status"
+                                class="form-control select2 @error('status') is-invalid @enderror"
                                 required>
                             <option value="">Select</option>
                             <option value="1"
@@ -52,7 +52,7 @@
                             </option>
                             <option value="0"
                                     @if($category->status  == 0) selected @endif >Inactive
-                            
+
 
                         </select>
                         @error('status')
@@ -60,10 +60,11 @@
                         @enderror
                     </div>
 
-                
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </form>
-    </div>
+        </div>
 @endsection

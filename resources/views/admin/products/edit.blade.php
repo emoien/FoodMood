@@ -119,6 +119,9 @@
                             <option value="1"
                                     @if($product->status == 1) selected @endif >Active
                             </option>
+                            <option value="2"
+                                    @if($category->status == 2) selected @endif >Catering
+                            </option>
                             <option value="0"
                                     @if($product->status  == 0) selected @endif >Inactive
 
