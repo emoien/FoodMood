@@ -14,7 +14,6 @@ class HomeController extends Controller
 
     public function __invoke()
     {
-
         return view('frontend.home',[
             'categories' => Category::active()->get(),
             'products' => Product::active()->latest()->take(10)->get(),

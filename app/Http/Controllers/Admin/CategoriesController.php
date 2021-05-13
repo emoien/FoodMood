@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        
+
         return view('admin.categories.index',[
             'categories' => Category::latest()->paginate(5)
         ]);
@@ -52,7 +53,7 @@ class CategoriesController extends Controller
 
         Category::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => $this->slug($request->name),
             'image' => $this->uploadImage($request->image)
         ]);
 
@@ -158,6 +159,13 @@ class CategoriesController extends Controller
         }
 
 
+    }
+
+    private function slug($name)
+    {
+        $slug = Str::slug($name);
+        $count = Category::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        return $count ? "{$slug}-{$count}" : $slug;
     }
 
 

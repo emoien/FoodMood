@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\CategoryProductsController;
 use App\Http\Controllers\Frontend\ChefProductsController;
+use App\Http\Controllers\Frontend\SingleProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -21,13 +22,16 @@ use App\Http\Controllers\Admin\ProductsController;
 
 
 Route::get('/', \App\Http\Controllers\Frontend\HomeController::class)->name('welcome');
-Route::get('/category/{category:slug}',[CategoryProductsController::class,'index'])->name('category.products');
-Route::get('/chefs/{user:first_name}',[ChefProductsController::class,'index'])->name('chef.products');
+Route::get('product/{product:slug}',[SingleProductController::class,'index'])->name('single.product');
+Route::get('category/{category:slug}',CategoryProductsController::class)->name('category.products');
+Route::get('chefs/{user:slug}',ChefProductsController::class)->name('chef.products');
+
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//TODO put in admin group
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('users', UsersController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('products',ProductsController::class);

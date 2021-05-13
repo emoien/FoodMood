@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -46,6 +48,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function booted()
+    {
+        User::creating(function ($model) {
+            $model->slug = Str::slug($model->first_name) . '-' . (User::latest()->first()->id + 1);
+        });
+        //latest sorts in descending order from id
+    }
 
 
     public function scopeActive($query)

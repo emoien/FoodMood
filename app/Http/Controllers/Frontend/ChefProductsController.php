@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class ChefProductsController extends Controller
 {
-    public function index(User $user)
+    public function __invoke(User $user)
     {
-        dd($user);
+        return view('frontend.productList',[
+            'productList' => $user->load('products')
+        ]);
 
     }
 }

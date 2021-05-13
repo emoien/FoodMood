@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class CategoryProductsController extends Controller
 {
-    public function index(Category $category)
+    public function __invoke(Category $category)
     {
-        dd($category);
-
+       return view('frontend.productList',[
+           'productList' => $category->load('products')
+       ]);
     }
 }

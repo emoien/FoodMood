@@ -13,6 +13,11 @@ class ProductImage extends Model
 
     public function thumbPath()
     {
-        return url('storage/products/images/thumb/'. $this->path);
+        return url('storage/products/images/thumb/' . $this->path);
+    }
+
+    public function path()
+    {
+        return url('storage/products/images/' . $this->path);
     }
 }

@@ -72,7 +72,7 @@
                                     {{--                                        <i class="far fa-star low-star"></i>--}}
                                     {{--                                        <i class="far fa-star low-star"></i>--}}
                                     {{--                                    </div>--}}
-                                    <h4><a href="#">{{$product->name}}</a></h4>
+                                    <h4><a href="{{route('single.product',[$product])}}">{{$product->name}}</a></h4>
                                     <div class="price">
                                         <ul>
                                             <li>{{$product->price}}</li>

@@ -14,101 +14,67 @@ use App\Models\ProductImage;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('admin.products.index',[
+        return view('admin.products.index', [
             'products' => Product::latest()->paginate(10)
         ]);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin.products.create',[
-            'categories' => Category::where('status',1)->get()
+        return view('admin.products.create', [
+            'categories' => Category::where('status', 1)->get()
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'name' => ['required', 'min:3', 'max:256'],
             'description' => ['required', 'min:5', 'max:256'],
             'price' => ['required', 'min:1', 'max:256',],
-            'cover' => ['required','image', 'mimes:jpeg,png,jpg', 'max:2048'],
-           
+            'cover' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+
         ]);
-       $product =  Product::create([
+        $product = Product::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => $this->slug($request->name),
             'cover' => $this->uploadImage($request->cover),
             'description' => $request->description,
             'price' => $request->price,
             'user_id' => auth()->id(),
-            'category_id' => $request->categories_id 
+            'category_id' => $request->categories_id
 
         ]);
 
         $this->uploadImages($product, $request->images);
 
         return redirect()->route('products.index')->with('success', 'Product created Success');
-        
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
-        
-        
+
+
         return view('admin.products.view', [
-            'product' => $product->load('category','user','images')
+            'product' => $product->load('category', 'user', 'images')
         ]);
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         return view('admin.products.edit', [
             'product' => $product,
-            'categories' => Category::where('status',1)->get()        
+            'categories' => Category::where('status', 1)->get()
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -116,7 +82,7 @@ class ProductsController extends Controller
             'description' => ['required', 'min:5', 'max:256'],
             'price' => ['required', 'min:1', 'max:256',],
             'cover' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-           
+
         ]);
 
         $product->name = $request->name;
@@ -127,16 +93,10 @@ class ProductsController extends Controller
         $product->save();
 
         $this->uploadImages($product, $request->images);
-        
+
         return redirect()->route('products.index')->with('success', 'Product updated Success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Product $product)
     {
         $product->delete();
@@ -180,11 +140,11 @@ class ProductsController extends Controller
             Storage::disk('public')->put('images/' . $imagename, $mainImage);
 
 
-             return $imagename;
+            return $imagename;
         } else {
             return $imagePath;
         }
-        
+
 
     }
 
@@ -219,4 +179,13 @@ class ProductsController extends Controller
         }
 
     }
+
+    private function slug($name)
+    {
+        $slug = Str::slug($name);
+        $count = Product::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        return $count ? "{$slug}-{$count}" : $slug;
+    }
 }
+
+
