@@ -4,7 +4,7 @@
     <style>
 
         .top-20 {
-            padding-top: 20px;
+            padding-top: 30px;
         }
 
     </style>
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="product_list">
                     <div class="row">
-                        @foreach($productList->products as $product)
+                        @foreach($products as $product)
                             <div class="col-lg-4 col-sm-6">
                                 <div class="single_product_item">
                                     <img src="{{$product->getCover()}}" alt="" class="img-fluid">
