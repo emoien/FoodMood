@@ -52,7 +52,8 @@ class User extends Authenticatable
     protected static function booted()
     {
         User::creating(function ($model) {
-            $model->slug = Str::slug($model->first_name) . '-' . (User::latest()->first()->id + 1);
+            $userId = User::latest()->first() ? User::latest()->first()->id : 0; 
+            $model->slug = Str::slug($model->first_name) . '-' . ($userId + 1);
         });
         //latest sorts in descending order from id
     }
