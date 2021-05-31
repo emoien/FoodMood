@@ -41,7 +41,7 @@
 
                         <tr>
                             <td>Status</td>
-                            <td>{{$product->status == 1 ? 'Enabled' : 'Disabled'}}</td>
+                            <td>{{$product->status() }}</td>
                         </tr>
 
                         <tr>

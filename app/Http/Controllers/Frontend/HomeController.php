@@ -14,6 +14,12 @@ class HomeController extends Controller
 
     public function __invoke()
     {
+        if(count(cart()->items())){
+
+            return redirect()->route('cart.continue.shopping')->with('message', 'More Products By Chef.');
+        }
+
+
         return view('frontend.home',[
             'categories' => Category::active()->get(),
             'products' => Product::active()->latest()->take(10)->get(),

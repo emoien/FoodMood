@@ -27,7 +27,23 @@
     <link rel="stylesheet" href="{{asset('frontend/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 
+
     @yield('css')
+
+    <style>
+      @if(count(cart()->items()) > 0)
+    .header-bottom .header-right .shopping-card::before{
+        content: "{{count(cart()->items())}}" !important;
+    }
+    @else
+    .header-bottom .header-right .shopping-card::before{
+        content: " " !important;
+    }
+    @endif
+    
+    </style>
+    
+  
 </head>
 
 <body>

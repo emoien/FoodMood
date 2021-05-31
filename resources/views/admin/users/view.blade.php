@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title',  'Category view')
+@section('title', 'User view')
 
 @section('content_header')
 
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">{{'Category View'}}</h1>
+                <h1 class="m-0 text-dark">{{'User View'}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{route('categories.index')}}">Categories</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('users.index')}}">Users</a></li>
                     <li class="breadcrumb-item">Details</li>
                 </ol>
             </div>
@@ -24,27 +24,32 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-blue">
-                    <h3 class="card-title">{{$category->name}}</h3>
+                    <h3 class="card-title">{{$user->username()}}</h3>
                 </div>
                 <div class="card-body">
                     <h3></h3>
                     <hr>
                     <table class="table table-responsive table-striped">
                         <tr>
-                            <td>Slug</td>
-                            <td>{{$category->slug}}</td>
+                            <td>Username</td>
+                            <td>{{$user->slug}}</td>
                         </tr>
 
 
 
                         <tr>
                             <td>Status</td>
-                            <td>{{$category->status()}}</td>
+                            <td>{{$user->status()}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Role</td>
+                            <td>{{$user->userRole()}}</td>
                         </tr>
 
                         <tr>
                             <td>Image</td>
-                            <td><img src="{{asset($category->getThumbImage())}}" alt=""></td>
+                            <td><img style=' height: 100px ; width: 100px' src="{{asset($user->adminlte_image())}}" alt=""></td>
                         </tr>
 
 
@@ -52,11 +57,11 @@
                     <hr>
                     <br>
                     <div class="card-footer clearfix" style="">
-                        <a href="{{route('categories.edit',[$category->id])}}"
+                        <a href="{{route('users.edit',[$user])}}"
                            class="btn btn-info  pull-left">
                             {{__('Edit')}}</a>
 
-                        <a href="{{route('categories.index')}}"
+                        <a href="{{route('users.index')}}"
                            class="btn  btn-default pull-right">{{__('Back')}}</a>
                     </div>
                 </div>

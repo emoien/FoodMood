@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
-            'status' => 0
+            'status' => 1
             //when a user is registered from this form it is always a user
             //email verification can be done after other things
         ]);

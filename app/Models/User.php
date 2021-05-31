@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Models\User;
 
-class User extends Authenticatable
+
+class User extends Authenticatable  implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -27,7 +29,8 @@ class User extends Authenticatable
         'role',
         'status',
         'image',
-        'slug'
+        'slug',
+        'email_verified_at'
     ];
 
 
@@ -53,10 +56,18 @@ class User extends Authenticatable
     protected static function booted()
     {
         User::creating(function ($model) {
-            $userId = User::latest()->first() ? User::latest()->first()->id : 0; 
-            $model->slug = Str::slug($model->first_name) . '-' . ($userId + 1);
+           
+            $model->slug = $model->slug($model->first_name);
         });
-        //latest sorts in descending order from id
+        
+    }
+
+
+    public function slug($name)
+    {
+        $slug = Str::slug($name);
+        $count = User::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        return $count ? "{$slug}-{$count}" : $slug;
     }
 
 
@@ -87,5 +98,38 @@ class User extends Authenticatable
         return url('storage/users/' . $this->image);
     }
 
+
+    public function username()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+
+    
+    }
+
+    public function adminlte_image()
+    
+    {
+        return $this->image ?  url('storage/users/' . $this->image) : url('images/logo.png');
+    }
+
+    public function adminlte_profile_url()
+    {
+        return route('users.edit', $this->id);
+    }
+
+    public function status()
+    {
+        return $this->status== 1 ? 'Active' : 'Inactive';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == 1;
+    }
+
+    public function isAdminOrStaff()
+    {
+        return $this->role == 1 || $this->role == 2; 
+    }
 
 }

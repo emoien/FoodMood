@@ -12,9 +12,11 @@ class SingleProductController extends Controller
     {
 
         return view('frontend.singleProduct',[
-            'product' => $product->load('images')
+            'product' => $product->load('images', 'user'), 
         ]);
     }
+
+
 
 
 }

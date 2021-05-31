@@ -64,12 +64,12 @@ return [
     |
     */
 
-    'usermenu_enabled' => false,
-    'usermenu_header' => false,
+    'usermenu_enabled' => true,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -226,8 +226,8 @@ return [
     'menu' => [
 
         [
-            'text' => 'HomePage',
-            'url' => 'home',
+            'text' => 'Dashboard',
+            'url' => 'dashboard',
             'icon' => 'fas fa-fw fa-home',
 
         ],
@@ -241,12 +241,14 @@ return [
             'text' => 'Categories',
             'url'  => 'categories',
             'icon' => 'fas fa-fw fa-tag',
+            'can' => 'manage_menu',
         ],
 
         [
             'text' => 'Products',
             'url'  => 'products',
             'icon' => 'fas fa-fw fa-tag',
+            'can' => 'manage_menu',
         ],
 
 

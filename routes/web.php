@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\ContinueShoppingController;
+
 
 
 /*
@@ -49,13 +52,24 @@ Route::get('product/{product:slug}',[SingleProductController::class,'index'])->n
 Route::get('category/{category:slug}',CategoryProductsController::class)->name('category.products');
 Route::get('chefs/{user:slug}',ChefProductsController::class)->name('chef.products');
 
+Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
+Route::get('/cart',[CartController::class, 'index'])->name('cart.view');
+Route::post('increase-quantity',[CartController::class, 'incrementQuantity'])->name('cart.increment');
+Route::post('decrease-quantity',[CartController::class, 'decrementQuantity'])->name('cart.decrement');
+
+Route::get('continue-shopping',ContinueShoppingController::class)->name('cart.continue.shopping');
 
 
 
-Auth::routes();
 
+
+Auth::routes(['verify' => true]);
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
 //TODO put in admin group
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dashboard', App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
 Route::resource('users', UsersController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('products',ProductsController::class);
+
+});

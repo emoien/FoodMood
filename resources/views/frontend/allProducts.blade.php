@@ -2,36 +2,50 @@
 
 @section('css')
     <style>
+        .image-size {
+            height: 220px;
+            width: 390px;
+        }
 
         .top-20 {
-            padding-top: 30px;
+            padding-top: 20px;
         }
 
     </style>
-
 @endsection
 
 @section('content')
-
-    <section class="product_list top-20">
-        <div class="container">
+<section class="category-area top-20">
+        <div class="container-fluid">
+            <!-- Section Tittle -->
             <div class="row">
-                <div class="product_list">
-                    <div class="row">
-                        @foreach($products as $product)
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="{{$product->getCover()}}" alt="" class="img-fluid">
-                                    <h3><a href="{{route('single.product',[$product])}}">{{$product->name}}</a></h3>
-                                    <p style="margin-top: -15px !important;"> $ {{$product->price}}</p>
-                                </div>
-                            </div>
-                        @endforeach
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center mb-85">
+                        <h2>Products</h2>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                @foreach($products as $product)
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="single-category mb-30">
+                            <div class="category-img">
+                                <a href="{{route('single.product',[$product])}}">
+                                    <img src="{{asset($product->getCover())}}" alt="{{$product->name}}"
+                                         class="image-size">
+                                </a>
+                                <a href="{{route('single.product',[$product])}}">
+                                    <h1 style="text-align: center">{{$product->name}}</h1>
 
+
+                                </a>
+
+                                <p style="margin-top: -15px !important;"> $ {{$product->price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
-
 @endsection

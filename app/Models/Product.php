@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
+use Freshbitsweb\LaravelCartManager\Traits\Cartable;
+
 
 
 class Product extends Model
 {
     use HasFactory;
+    use Cartable;
 
     protected $guarded = [];
 
@@ -36,7 +39,13 @@ class Product extends Model
 
     public function status()
     {
-        return $this->status == 1 ? 'Active' : 'Inactive';
+        $status = [
+            0 => 'Inactive',
+            1 => 'Active',
+            2 => 'Catering',
+           
+        ];
+        return $status[$this->status];
     }
 
     public function getCoverThumb()
@@ -48,5 +57,7 @@ class Product extends Model
     {
         return url('storage/images/' . $this->cover);
     }
+
+
 
 }

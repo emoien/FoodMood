@@ -44,11 +44,13 @@
                class="btn btn-sm btn-info mb-1"><i class="fa fa-pen"></i></a>
              <a href="{{route('products.show',[$product])}}"
                 class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
+                @if(auth()->user()->isAdminOrStaff())
                 <form action="{{route('products.destroy',[$product])}}" method="POST">
                 @csrf
                 @method('DELETE')
                   <button type="submit" class="btn btn-sm btn-danger delete mb-1"><i class="fa fa-trash"></i></button>
                 </form>
+                @endif
 
 
       </td>

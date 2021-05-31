@@ -17,8 +17,15 @@ class ProductsController extends Controller
 
     public function index()
     {
+        if(auth()->user()->isAdminOrStaff())
+        {
+            $products = Product::latest()->paginate(10);
+        }else{
+            $products = Product::where('user_id',auth()->user()->id)->latest()->paginate(10);
+        }
+
         return view('admin.products.index', [
-            'products' => Product::latest()->paginate(10)
+            'products' => $products
         ]);
 
     }
@@ -88,7 +95,7 @@ class ProductsController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->cover = $this->uploadImage($request->image, $product->cover);
+        $product->cover = $this->uploadImage($request->cover, $product->cover);
         $product->status = $request->status;
         $product->save();
 

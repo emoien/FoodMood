@@ -30,22 +30,25 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($categories as $category)
+  @foreach($categories as $key => $category)
     <tr>
-      <th scope="row">{{$category->id}}</th>
+      <th scope="row">{{$key+1}}</th>
       <td>{{$category->name}} </td>
       <td>{{$category->status()}}</td>
       
       <td> 
-            <a href="{{route('categories.edit',[$category])}}"
-               class="btn btn-sm btn-info mb-1"><i class="fa fa-pen"></i></a>
              <a href="{{route('categories.show',[$category])}}"
                 class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
+                @if(auth()->user()->isAdminOrStaff())
+              <a href="{{route('categories.edit',[$category])}}"
+               class="btn btn-sm btn-info mb-1"><i class="fa fa-pen"></i></a>
                 <form action="{{route('categories.destroy',[$category])}}" method="POST">
                 @csrf
                 @method('DELETE')
                   <button type="submit" class="btn btn-sm btn-danger delete mb-1"><i class="fa fa-trash"></i></button>
                 </form>
+                @endif
+                
 
 
       </td>

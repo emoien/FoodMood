@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
 
 
 class UsersController extends Controller
@@ -16,8 +18,15 @@ class UsersController extends Controller
      */
     public function index()
     {
+       
+        if(auth()->user()->isAdminOrStaff())
+        {
+            $users = User::all();
+        }else{
+            $users = User::where('id',auth()->user()->id)->get();
+        }
         return view('admin.users.index',[
-            'users' => User::all()
+            'users' => $users
         ]);
     }
 
@@ -57,7 +66,7 @@ class UsersController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'email_verified_at' => now(),
+            'email_verified_at' => Carbon::now(),
             'phone' => $request->phone,
             'role' => $request->role
         ]);
@@ -76,7 +85,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('admins.users.view', [
+        return view('admin.users.view', [
             'user' => $user,
         ]);
     }
@@ -118,12 +127,22 @@ class UsersController extends Controller
             $user->password = bcrypt($request->password);
         }
         
-        // if (auth()->user()->isAdmin()) {
-            // $user->status = $request->is_active;
-        // }
+        if (auth()->user()->isAdmin()) {
+            $user->status = $user->id == 1 ? 1 : $request->status;
+            $user->role = $request->role;
+        }
         $user->save();
+
+
+        if(auth()->id() == $user->id){
+            return redirect()->route('dashboard')->with('success', 'User Updated Success');
+
+
+        }
         return redirect()->route('users.index')->with('success', 'User Updated Success');
-    }
+
+    }   
+
 
     /**
      * Remove the specified resource from storage.
@@ -133,7 +152,11 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if (auth()->user()->userRole() == 'Admin') {
+        if ($user->id==1) {
+            return redirect()->route('users.index')->with('deleted', 'User cannot be deleted');
+        } 
+
+        if (auth()->user()->isAdmin()) {
             $user->delete();
             return redirect()->route('users.index')->with('deleted', 'User Deleted Success');
         }

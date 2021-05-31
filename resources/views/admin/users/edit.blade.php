@@ -104,6 +104,7 @@
                         @enderror
                     </div>
 
+                    @if(auth()->user()->isAdmin())
                     <div class="form-group">
                         <label for="role">Assign Role <span class="required-form">*</span></label>
                         <select name="role" id="role" class="form-control select2 @error('role') is-invalid @enderror"
@@ -124,7 +125,27 @@
                         <span style="color: red">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="status">Status <span class="required-form">*</span></label>
+                        <select name="status" id="status"
+                                class="form-control select2 @error('status') is-invalid @enderror"
+                                required>
+                            <option value="">Select</option>
+                            <option value="1"
+                                    @if($user->status == 1) selected @endif >Active
+                            </option>
+                            <option value="0"
+                                    @if($user->status  == 0) selected @endif >Deactive
+
+
+                        </select>
+                        @error('status')
+                        <span style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    @endif
                 </div>
+                
 
                 
                 <div class="card-footer">

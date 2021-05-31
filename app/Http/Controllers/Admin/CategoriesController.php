@@ -119,6 +119,12 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
+
+        if($category->products()->count())
+        {
+            return redirect()->route('categories.index')->with('deleted', 'Cannot delete Category. Product exists.'); 
+        }
+
         Storage::disk('public')->delete('images/' .$category->image);
         Storage::disk('public')->delete('thumb/' . $category->image);
         $category->delete();
