@@ -51,6 +51,11 @@
 
 @include('frontend.partials.header')
 <main>
+      @if (session()->has('message'))
+      <div class="alert alert-primary">
+              {{ session('message') }}
+      </div>
+    @endif
     @yield('content')
 </main>
 @include('frontend.partials.footer')
@@ -90,6 +95,14 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="{{asset('frontend/js/plugins.js')}}"></script>
 <script src="{{asset('frontend/js/main.js')}}"></script>
+
+  <script>
+        $(function () {
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 8000)
+        })
+    </script>
 
 </body>
 </html>
