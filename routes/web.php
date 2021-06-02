@@ -43,6 +43,10 @@ Route::get('/privacy-policy', function(){
     return view('frontend.static.privacy');
 })->name('privacy');
 
+Route::get('/become-chef', function(){
+    return view('frontend.static.become-chef');
+})->name('upgrade');
+
 
 
 Route::get('/', \App\Http\Controllers\Frontend\HomeController::class)->name('welcome');
@@ -51,6 +55,7 @@ Route::get('products-list', \App\Http\Controllers\Frontend\ProductsList::class)-
 Route::get('product/{product:slug}',[SingleProductController::class,'index'])->name('single.product');
 Route::get('category/{category:slug}',CategoryProductsController::class)->name('category.products');
 Route::get('chefs/{user:slug}',ChefProductsController::class)->name('chef.products');
+Route::get('catering-product', \App\Http\Controllers\Frontend\CateringProductsController::class)->name('catering.products');
 
 Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart',[CartController::class, 'index'])->name('cart.view');

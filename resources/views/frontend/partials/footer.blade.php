@@ -26,6 +26,8 @@
                             <ul>
                                 <li><a href="{{route('about')}}">About</a></li>
                                <li><a href="{{route('contact')}}">  Contact Us</a></li>
+                               <li><a href="{{route('upgrade')}}">Become Chef?</a></li>
+
                             </ul>
                         </div>
                     </div>

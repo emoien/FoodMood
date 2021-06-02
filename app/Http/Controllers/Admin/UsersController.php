@@ -18,6 +18,7 @@ class UsersController extends Controller
      */
     public function index()
     {
+        
        
         if(auth()->user()->isAdminOrStaff())
         {

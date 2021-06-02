@@ -19,8 +19,12 @@
                                         <li><a href="{{route('welcome')}}">Home</a></li>
                                         <li><a href="{{route('list.category')}}">Catagories</a></li>
                                         <li><a href="{{route('list.product')}}">Products</a></li>
+                                        <li><a href="{{route('catering.products')}}">Catering</a></li>
                                         <li><a href="{{route('contact')}}">Contact Us</a></li>
                                         <li><a href="{{route('faq')}}">FAQ</a></li>
+                                        
+                                       
+
                                         
                                     </ul>
                                 </nav>

@@ -17,10 +17,9 @@ class CategoryProductsController extends Controller
             $product = Product::find($productId);
 
             $products = Category::with(['products' => function($query) use($product){
-                $query->where('category_id', $product->category_id)->where('status', $product->status)->where('user_id', $product->user_id)->paginate(10);
-            }])->find($product->category_id);
+                $query->where('status', $product->status)->where('user_id', $product->user_id)->paginate(10);
+            }])->find($category->id);
             
-        
          }
         
         else {

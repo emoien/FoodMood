@@ -41,23 +41,23 @@
                 </td>
                 <td>
                   <div class="product_count">
-                    
-                    <form action="{{route('cart.increment')}}" method='POST'>
+                  <form action="{{route('cart.decrement')}}" method='POST'>
+
+                  
 
                     @csrf
                     <input type="hidden" value="{{$key}}" name="index">
-                    <button class="p-1 px-2 btn_1" style="height:30px; width:100px" ><i class="ti-plus"></i> </button>
+                    <button class="p-1 px-2 btn_1" style="height:30px; width:100px" ><i class="ti-minus"></i> </button>
                     </form>
                    
                     <input class="input-number" readonly type="text" value="{{$item['quantity']}}" min="0" >
                    
 
-                   
-                    <form action="{{route('cart.decrement')}}" method='POST'>
+                    <form action="{{route('cart.increment')}}" method='POST'>
 
                     @csrf
                     <input type="hidden" value="{{$key}}" name="index">
-                    <button class=" p-1 px-2 btn_1" style="height:30px; width:100px" ><i class="ti-minus"></i> </button>
+                    <button class=" p-1 px-2 btn_1" style="height:30px; width:100px" ><i class="ti-plus"></i> </button>
                     </form>
 
                   </div>

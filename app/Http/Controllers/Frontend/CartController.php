@@ -12,7 +12,7 @@ class CartController extends Controller
     public function index()
     {   
         if (count(cart()->items()) < 1) {
-            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
+            return redirect()->route('welcome')->with('error', 'No Items in Cart, Please Add Before Processing');
         }
         return view('frontend.cartView',[
             'items' => cart()->items(),
@@ -37,7 +37,7 @@ class CartController extends Controller
     public function decrementQuantity(Request $request)
     {
         if (count(cart()->items()) < 1) {
-            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
+            return redirect()->route('welcome')->with('error', 'No Items in Cart, Please Add Before Processing');
         }
         cart()->decrementQuantityAt($request->index);
         return redirect()->route('cart.view')->with('success', 'Product Decreased.') ;
