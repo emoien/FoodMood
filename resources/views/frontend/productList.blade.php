@@ -22,11 +22,11 @@
 
 @section('content')
 
-    <section class="product_list top-20">
-        <div class="container">
+    <section class="category-area top-20">
+        <div class="container-fluid">
             <div class="row">
                         @foreach($productList->products as $product)
-                        <div class="col-xl-4 col-lg-6">
+                        <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">
                             <div class="category-img">
                                 <a href="{{route('single.product',[$product])}}">

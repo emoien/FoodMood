@@ -95,26 +95,34 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     public function getImage()
     {
-        return url('storage/users/' . $this->image);
+        
+         return $this->image ?  url('storage/user_image/' . $this->image) : url('images/chef.png');
     }
 
+
+    
+
+    public function adminlte_image()
+    
+    {
+        return $this->image ?  url('storage/user_image/' . $this->image) : url('images/logo.png');
+    }
+
+    public function adminlte_profile_url()
+    {
+        return route('users.edit', $this->id);
+    }
+
+    public function adminlte_desc()
+    {
+        return $this->username();
+    }
 
     public function username()
     {
         return $this->first_name . ' ' . $this->last_name;
 
     
-    }
-
-    public function adminlte_image()
-    
-    {
-        return $this->image ?  url('storage/users/' . $this->image) : url('images/logo.png');
-    }
-
-    public function adminlte_profile_url()
-    {
-        return route('users.edit', $this->id);
     }
 
     public function status()

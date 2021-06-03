@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 @foreach($categories as $category)
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">
                             <div class="category-img">
                                 <a href="{{route('category.products',[$category])}}">
@@ -45,8 +45,8 @@
         </div>
     </section>
 
-    <section class="latest-product-area top-20">
-        <div class="container">
+    <section class="category-area top-20">
+        <div class="container-fluid">
             <div class="product-btn">
                 <!-- Section Tittle -->
                 <div class="section-tittle mb-30">
@@ -56,27 +56,17 @@
 
                 <div class="row">
                     @foreach($products as $product)
-                        <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
                                     <img src="{{$product->getCover()}}" alt="" class="image-size">
-{{--                                    <div class="new-product">--}}
-{{--                                        <span>{{$product->price}}</span>--}}
-{{--                                    </div>--}}
                                 </div>
                                 <div class="product-caption">
-                                    {{--                                    <div class="product-ratting">--}}
-                                    {{--                                        <i class="far fa-star"></i>--}}
-                                    {{--                                        <i class="far fa-star"></i>--}}
-                                    {{--                                        <i class="far fa-star"></i>--}}
-                                    {{--                                        <i class="far fa-star low-star"></i>--}}
-                                    {{--                                        <i class="far fa-star low-star"></i>--}}
-                                    {{--                                    </div>--}}
-                                    <h4><a href="{{route('single.product',[$product])}}">{{$product->name}}</a></h4>
+    
+                                    <a><h1 href="{{route('single.product',[$product])}}"style="color: black !important;">{{$product->name}}</a></h4>
                                     <div class="price">
                                         <ul>
-                                            <li>{{$product->price}}</li>
-                                            {{--                                            <li class="discount">$60.00</li>--}}
+                                            <li>${{$product->price}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -99,7 +89,7 @@
             </div>
             <div class="row">
                 @foreach($chefs as $chef)
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">
                             <div class="category-img">
                                 <a href="{{route('chef.products',[$chef])}}">

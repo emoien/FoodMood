@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 @foreach($products as $product)
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">
                             <div class="category-img">
                                 <a href="{{route('single.product',[$product])}}">
@@ -40,7 +40,7 @@
 
                                 </a>
 
-                                <p style="margin-top: -15px !important;"> $ {{$product->price}}</p>
+                                <p style="margin-top: -15px !important; text-align: center"> $ {{$product->price}}</p>
                             </div>
                         </div>
                     </div>

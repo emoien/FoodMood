@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 
 
@@ -57,7 +60,8 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required'],
-            'role' => ['required']
+            'role' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
             
         ]);
 
@@ -69,7 +73,8 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
             'email_verified_at' => Carbon::now(),
             'phone' => $request->phone,
-            'role' => $request->role
+            'role' => $request->role,
+            'image' => $this->uploadImage($request->image)
         ]);
 
     
@@ -118,12 +123,16 @@ class UsersController extends Controller
             'first_name' => ['required','string'],
             'last_name' => ['required','string'],
             'password' => ['nullable', 'min:8'],
-            'phone' => ['required']
+            'phone' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
+
             
         ]);
 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+        $user->image = $this->uploadImage($request->image, $user->image);
+
         if (isset($request->password)) {
             $user->password = bcrypt($request->password);
         }
@@ -158,9 +167,51 @@ class UsersController extends Controller
         } 
 
         if (auth()->user()->isAdmin()) {
+            Storage::disk('public')->delete('user_image/' .$user->image);
+            Storage::disk('public')->delete('thumb/' . $user->image);
+
             $user->delete();
             return redirect()->route('users.index')->with('deleted', 'User Deleted Success');
         }
         return redirect()->route('users.index')->with('deleted', 'User cannot be deleted');
+
+        
+       
+
+    }
+
+    private function uploadImage($image, $imagePath = Null)
+    {
+
+        if (isset($image)) {
+
+            if (isset($imagePath)) {
+                Storage::disk('public')->delete('user_image/' . $imagePath);
+                Storage::disk('public')->delete('thumb/' . $imagePath);
+            }
+
+            $currentdate = Carbon::now()->toDateString();
+            $imagename = $currentdate . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!Storage::disk('public')->exists('user_image')) {
+                Storage::disk('public')->makeDirectory('user_image');
+            }
+            $mainImage = Image::make($image)->stream();
+
+            if (!Storage::disk('public')->exists('thumb')) {
+                Storage::disk('public')->makeDirectory('thumb');
+            }
+
+            $thumb = Image::make($image)->resize(100, 100)->stream();
+
+            Storage::disk('public')->put('thumb/' . $imagename, $thumb);
+            Storage::disk('public')->put('user_image/' . $imagename, $mainImage);
+
+
+             return $imagename;
+        } else {
+            return $imagePath;
+        }
+
+
     }
 }

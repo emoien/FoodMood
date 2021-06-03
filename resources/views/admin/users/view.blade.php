@@ -49,7 +49,7 @@
 
                         <tr>
                             <td>Image</td>
-                            <td><img style=' height: 100px ; width: 100px' src="{{asset($user->adminlte_image())}}" alt=""></td>
+                            <td><img style=' height: 100px ; width: 100px' src="{{asset($user->getImage())}}" alt=""></td>
                         </tr>
 
 

@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">{{'Category View'}}</h1>
+                <h1 class="m-0 text-dark">Category View</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -52,12 +52,15 @@
                     <hr>
                     <br>
                     <div class="card-footer clearfix" style="">
+                        @if(auth()->user()->isAdmin())
                         <a href="{{route('categories.edit',[$category->id])}}"
                            class="btn btn-info  pull-left">
-                            {{__('Edit')}}</a>
+                            Edit
+                        </a>
+                        @endif
 
                         <a href="{{route('categories.index')}}"
-                           class="btn  btn-default pull-right">{{__('Back')}}</a>
+                           class="btn  btn-default pull-right">Back</a>
                     </div>
                 </div>
             </div>
