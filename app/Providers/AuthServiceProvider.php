@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return auth()->user()->role != 0 ;
         });
 
+
+        Gate::define('enquiry_view', function () {
+            return auth()->user()->isAdminOrStaff() ;
+        });
         //
     }
 }

@@ -67,7 +67,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         $slug = Str::slug($name);
         $count = User::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-        return $count ? "{$slug}-{$count}" : $slug;
+        return $count ? ($slug .'-'.($count + 1)) : $slug;
     }
 
 

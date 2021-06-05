@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 @foreach($categories as $category)
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">
                             <div class="category-img">
                                 <a href="{{route('category.products',[$category])}}">

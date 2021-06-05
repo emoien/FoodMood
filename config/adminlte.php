@@ -252,6 +252,15 @@ return [
         ],
 
 
+        [
+            'text' => 'Enquiries',
+            'url'  => 'enquiries',
+            'icon' => 'fas fa-fw fa-tag',
+            'can' => 'enquiry_view',
+        ]
+
+
+
         // [
         //     'header' => 'ACCOUNT SETTINGS',
         // ],

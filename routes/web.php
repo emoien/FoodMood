@@ -9,6 +9,10 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ContinueShoppingController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Admin\EnquiryController;
+use App\Http\Controllers\Frontend\CheckoutController;
+
 
 
 
@@ -47,6 +51,14 @@ Route::get('/become-chef', function(){
     return view('frontend.static.become-chef');
 })->name('upgrade');
 
+Route::get('/thank-you', function(){
+    return view('frontend.static.thankyou');
+})->name('thankyou');
+
+
+
+
+
 
 
 Route::get('/', \App\Http\Controllers\Frontend\HomeController::class)->name('welcome');
@@ -56,6 +68,8 @@ Route::get('product/{product:slug}',[SingleProductController::class,'index'])->n
 Route::get('category/{category:slug}',CategoryProductsController::class)->name('category.products');
 Route::get('chefs/{user:slug}',ChefProductsController::class)->name('chef.products');
 Route::get('catering-product', \App\Http\Controllers\Frontend\CateringProductsController::class)->name('catering.products');
+Route::post('contact', \App\Http\Controllers\Frontend\ContactController::class)->name('contact.mail');
+
 
 Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart',[CartController::class, 'index'])->name('cart.view');
@@ -63,6 +77,8 @@ Route::post('increase-quantity',[CartController::class, 'incrementQuantity'])->n
 Route::post('decrease-quantity',[CartController::class, 'decrementQuantity'])->name('cart.decrement');
 
 Route::get('continue-shopping',ContinueShoppingController::class)->name('cart.continue.shopping');
+Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout',[CheckoutController::class,'store'])->name('cart.checkout');
 
 
 
@@ -76,5 +92,8 @@ Route::get('dashboard', App\Http\Controllers\Admin\DashboardController::class)->
 Route::resource('users', UsersController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('products',ProductsController::class);
+
+Route::get('enquiries',[EnquiryController::class,'index'])->name('enquiries');
+Route::get('enquiries/{id}',[EnquiryController::class,'show'])->name('enquiries.view');
 
 });

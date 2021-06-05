@@ -39,8 +39,10 @@
                                     </div>
                                 </li>
                                 @guest
+                                @if(Request::segment(1) != 'checkout')
                                 <li class="d-none d-lg-block"> <a href="{{route('login')}}" class="btn header-btn">Sign in</a></li>
                                 <li class="d-none d-lg-block"> <a href="{{route('register')}}" class="btn header-btn">Register</a></li>
+                                @endif
                                 @else
                                 <li class="d-none d-lg-block"> <a href="{{route('dashboard')}}" class="btn header-btn">Dashboard</a></li>
 

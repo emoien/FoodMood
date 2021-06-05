@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/slick.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 
 
     @yield('css')
@@ -95,6 +96,7 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="{{asset('frontend/js/plugins.js')}}"></script>
 <script src="{{asset('frontend/js/main.js')}}"></script>
+@stack('scripts')
 
   <script>
         $(function () {

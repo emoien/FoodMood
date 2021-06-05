@@ -59,11 +59,13 @@
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
+                                    <a href="{{route('single.product',[$product])}}">
                                     <img src="{{$product->getCover()}}" alt="" class="image-size">
+                                </a>
                                 </div>
                                 <div class="product-caption">
     
-                                    <a><h1 href="{{route('single.product',[$product])}}"style="color: black !important;">{{$product->name}}</a></h4>
+                                    <a href="{{route('single.product',[$product])}}" style="color: black !important;"><h1 >{{$product->name}} </h1></a>
                                     <div class="price">
                                         <ul>
                                             <li>${{$product->price}}</li>
