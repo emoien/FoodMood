@@ -81,7 +81,7 @@
                                name="password"
                                id="password"
                                placeholder="Enter Your Password"
-                               required
+                               
                                minlength="8"
                         >
                         @error('password')
@@ -96,7 +96,7 @@
                                name="password_confirmation"
                                id="password_confirmation"
                                placeholder="Enter Your Password again"
-                               required
+                               
                                minlength="8"
                         >
                         @error('password_confirmation')

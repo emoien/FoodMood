@@ -14,6 +14,7 @@ use App\Mail\OrderStatus;
 use App\Mail\UserRegistered;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Models\Product;
 
 class CheckoutController extends Controller
 {
@@ -117,6 +118,7 @@ class CheckoutController extends Controller
 private function addToOrdersTables($request, $stripe , $user)
 {
 
+  $chefId = Product::find(cart()->items()[0]['modelId'])->user_id;
   $order = Order::create([
             'user_id' =>  $user->id,
             'name' => $request->name,
@@ -130,7 +132,8 @@ private function addToOrdersTables($request, $stripe , $user)
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
             'status' => '0',
-            'delivery_date' => $request->datetime
+            'delivery_date' => $request->datetime,
+            'chef_id' => $chefId
 
         ]);
         Mail::to($user->email)->send(new OrderStatus($order));

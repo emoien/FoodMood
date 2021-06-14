@@ -72,6 +72,7 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'email_verified_at' => Carbon::now(),
+            'chef_verified_at' => $request->role == 3 ? Carbon::now() : null,
             'phone' => $request->phone,
             'role' => $request->role,
             'image' => $this->uploadImage($request->image)
@@ -129,6 +130,7 @@ class UsersController extends Controller
             
         ]);
 
+
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->image = $this->uploadImage($request->image, $user->image);
@@ -139,8 +141,23 @@ class UsersController extends Controller
         
         if (auth()->user()->isAdmin()) {
             $user->status = $user->id == 1 ? 1 : $request->status;
-            $user->role = $request->role;
+
+          
         }
+
+        if (auth()->user()->isAdminOrStaff()) {
+           
+
+            
+
+            if ($user->role != '3' && $request->role == '3'){
+                $user->chef_verified_at = Carbon::now(); 
+            }
+
+             $user->role = $request->role;
+        }
+
+
         $user->save();
 
 

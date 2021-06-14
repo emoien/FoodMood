@@ -12,6 +12,9 @@ use App\Http\Controllers\Frontend\ContinueShoppingController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Admin\ChefRequestController;
+use App\Http\Controllers\Admin\OrderController;
+
 
 
 
@@ -69,6 +72,7 @@ Route::get('category/{category:slug}',CategoryProductsController::class)->name('
 Route::get('chefs/{user:slug}',ChefProductsController::class)->name('chef.products');
 Route::get('catering-product', \App\Http\Controllers\Frontend\CateringProductsController::class)->name('catering.products');
 Route::post('contact', \App\Http\Controllers\Frontend\ContactController::class)->name('contact.mail');
+Route::post('chef-registery', \App\Http\Controllers\Frontend\BecomeChefController::class)->name('become.chef');
 
 
 Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
@@ -93,7 +97,15 @@ Route::resource('users', UsersController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('products',ProductsController::class);
 
+Route::post('orders/change-status',[OrderController::class, 'changeStatus'])->name('orders.change.status');
+
+Route::get('orders',[OrderController::class, 'index'])->name('orders');
+Route::get('orders/{id}',[OrderController::class, 'show'])->name('orders.view');
+
 Route::get('enquiries',[EnquiryController::class,'index'])->name('enquiries');
 Route::get('enquiries/{id}',[EnquiryController::class,'show'])->name('enquiries.view');
 
+Route::get('chefregisters',[ChefRequestController::class,'index'])->name('chefRegisters');
+Route::get('chefregisters/{id}',[ChefRequestController::class,'show'])->name('chefRegister.view');
 });
+

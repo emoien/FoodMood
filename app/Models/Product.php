@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
 use Freshbitsweb\LaravelCartManager\Traits\Cartable;
+use App\Models\Order;
 
 
 
@@ -59,7 +60,9 @@ class Product extends Model
     }
 
 
-    public function orders()
+   
+
+      public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
     }

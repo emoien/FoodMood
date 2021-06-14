@@ -14,11 +14,23 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('quantity');
+        return $this->belongsToMany(Product::class,'order_product')->withPivot('quantity');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function status()
+    {
+
+        $status = [ 
+            0 => 'Order Placed',
+            1 => 'Delivered',
+            2 => 'Cancelled'
+        ];
+
+        return $status[$this->status];
     }
 }

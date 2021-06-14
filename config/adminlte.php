@@ -241,14 +241,21 @@ return [
             'text' => 'Categories',
             'url'  => 'categories',
             'icon' => 'fas fa-fw fa-tag',
-            'can' => 'manage_menu',
+            'can' => 'isNotUser',
         ],
 
         [
             'text' => 'Products',
             'url'  => 'products',
             'icon' => 'fas fa-fw fa-tag',
-            'can' => 'manage_menu',
+            'can' => 'isNotUser',
+        ],
+
+        [
+            'text' => 'Orders',
+            'url'  => 'orders',
+            'icon' => 'fas fa-fw fa-tag',
+            
         ],
 
 
@@ -256,7 +263,14 @@ return [
             'text' => 'Enquiries',
             'url'  => 'enquiries',
             'icon' => 'fas fa-fw fa-tag',
-            'can' => 'enquiry_view',
+            'can' => 'isAdminOrStaff',
+        ],
+
+        [
+            'text' => 'Chef Request',
+            'url'  => 'chefregisters',
+            'icon' => 'fas fa-fw fa-tag',
+            'can' => 'isAdminOrStaff',
         ]
 
 

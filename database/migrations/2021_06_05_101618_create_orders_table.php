@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('chef_id');
             $table->string('charge_id')->nullable();
             $table->boolean('status');
             $table->string('billing_address1');

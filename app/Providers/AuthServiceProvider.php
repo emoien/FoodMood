@@ -26,12 +26,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
 
-        Gate::define('manage_menu', function () {
+        Gate::define('isNotUser', function () {
             return auth()->user()->role != 0 ;
         });
 
 
-        Gate::define('enquiry_view', function () {
+        Gate::define('isAdminOrStaff', function () {
             return auth()->user()->isAdminOrStaff() ;
         });
         //
