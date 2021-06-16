@@ -13,7 +13,7 @@
                             </div>
                             <div class="footer-tittle">
                                 <div class="footer-pera">
-                                    <p>FoodMood Description</p>
+                                    <p>FoodMOOD, an online platform connecting the foodies with the home-based chefs.</p>
                                 </div>
                             </div>
                         </div>
