@@ -17,7 +17,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{route('welcome')}}">Home</a></li>
-                                        <li><a href="{{route('list.category')}}">Catagories</a></li>
+                                        <li><a href="{{route('list.category')}}">Categories</a></li>
                                         <li><a href="{{route('list.product')}}">Products</a></li>
                                         <li><a href="{{route('catering.products')}}">Catering</a></li>
                                         <li><a href="{{route('contact')}}">Contact Us</a></li>
