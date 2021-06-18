@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '',
+    'logo' => 'HomePage',
     'logo_img' => 'Images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,

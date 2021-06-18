@@ -25,9 +25,9 @@ class BecomeChefController extends Controller
         } else{
 
         $request->validate([
-            'name' => ['required', 'string'],
-            'message' => ['required', 'min:5'],
-            'phone' => ['required'],
+            'name' => ['required', 'string', 'min:3'],
+            'message' => ['required', 'min:10'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 

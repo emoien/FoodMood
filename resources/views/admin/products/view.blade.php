@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', Product view)
+@section('title', 'Product view')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">{{Product View}}</h1>
+                <h1 class="m-0 text-dark">{{'Product View'}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">

@@ -54,7 +54,7 @@ class CheckoutController extends Controller
                     'first_name' => ['required','string'],
                     'last_name' => ['required','string'],
                     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                    'phone' => ['required'],  
+                    'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],  
                     'city' => ['required'],
                     'add1' => ['required'],
                     'name' => ['required'],

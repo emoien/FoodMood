@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Product create' )
+@section('title','Product Edit' )
 
 
 @section('content')
@@ -83,7 +83,7 @@
                                onchange="document.getElementById('cover').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <img id="cover"
-                         src="{{ $product->cover ? $product->getCoverThumb() : "/images/admin/preview.jpg"}}"
+                         src="{{ $product->cover ? $product->getCoverThumb() : "/images/admin/preview.jpg"}}
                          height="100px" width="100px"><br>
                 </div>
 

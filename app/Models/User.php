@@ -57,16 +57,17 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         User::creating(function ($model) {
            
-            $model->slug = $model->slug($model->first_name);
+            $model->slug = $model->slug($model);
         });
         
     }
 
 
-    public function slug($name)
+    public function slug($model)
     {
-        $slug = Str::slug($name);
-        $count = User::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        $slug = Str::slug($model->first_name) . '-' . Str::slug($model->last_name);
+        $count = User::where("first_name", $model->first_name)->where('last_name', $model->last_name)->get()->count();
+
         return $count ? ($slug .'-'.($count + 1)) : $slug;
     }
 

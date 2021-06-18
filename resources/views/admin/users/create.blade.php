@@ -19,7 +19,8 @@
                                placeholder="Enter Your First Name"
                                value="{{ old('first_name') }}"
                                autofocus
-                               required
+                               required 
+                               
                         >
                         @error('first_name')
                         <span style="color: red">{{ $message }}</span>

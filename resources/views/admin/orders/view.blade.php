@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-blue">
-                    <h3 class="card-title">{{$order->id}}</h3>
+                    <h3 class="card-title">Order ID: {{$order->id}}</h3>
                 </div>
                 <div class="card-body">
                     <h3></h3>

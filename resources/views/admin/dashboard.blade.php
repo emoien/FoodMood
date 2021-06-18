@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 @section('content')
-<div class="card">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{('Dashboard') }}</div>
+                <div style="text: solid !important" class="card-header">Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,23 +13,24 @@
                         </div>
                     @endif
 
-                    <h3>Welcome to FoodMood portal.</h3>
+                    <p>Welcome to FoodMood portal.</p>
                     @if(auth()->user()->role==0)
-                    <h4>To start ordering go to:
-                        <a href="{{route('welcome')}}">Homepage</a></h4>
-                    @endif
-                    @if(auth()->user()->role==3)
-                    <h4>You can view your orders and manage menu from this portal.<br><br>
+                    <p>To start ordering go to:
+                        <a href="{{route('welcome')}}">Homepage</a></p>
+                   
+                    @elseif(auth()->user()->role==3)
+                    <p>You can view your orders and manage menu from this portal.<br><br>
                         Contact staff members or email us for help.
-                        </h4>
+                        </p>
+                    @else
+                   
+                    <p>This is backend of the website. You can manage users, products, categories, enquiries and chef requests.</p>
+                    
                     @endif
-                    
-                    <h4>This is backend of the website. You can manage users, products, categories, enquiries and chef requests.</h4>
-                    
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection
 

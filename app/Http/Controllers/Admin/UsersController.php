@@ -25,9 +25,9 @@ class UsersController extends Controller
        
         if(auth()->user()->isAdminOrStaff())
         {
-            $users = User::all();
+            $users = User::latest()->paginate(10);
         }else{
-            $users = User::where('id',auth()->user()->id)->get();
+            $users = User::where('id',auth()->user()->id)->paginate(1);
         }
         return view('admin.users.index',[
             'users' => $users
@@ -59,7 +59,7 @@ class UsersController extends Controller
             'last_name' => ['required','string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'role' => ['required'],
             'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
             
@@ -92,6 +92,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        
         return view('admin.users.view', [
             'user' => $user,
         ]);

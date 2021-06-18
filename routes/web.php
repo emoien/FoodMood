@@ -58,6 +58,10 @@ Route::get('/thank-you', function(){
     return view('frontend.static.thankyou');
 })->name('thankyou');
 
+Route::get('covid-19-response', function(){
+    return view('frontend.static.covid-19');
+})->name('covid');
+
 
 
 

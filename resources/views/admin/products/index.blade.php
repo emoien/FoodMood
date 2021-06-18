@@ -24,7 +24,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Description</th>
+      <th scope="col">Created By</th>
       <th scope="col">Price</th>
       <th scope="col">Status</th>
       <th scope="col">Action</th>
@@ -36,7 +36,7 @@
     <tr>
       <th scope="row">{{$key + 1}}</th>
       <td>{{$product->name}} </td>
-      <td>{{$product->description}} </td>
+      <td>{{$product->user->first_name}} {{$product->user->last_name}}</td>
       <td>{{$product->price}} </td>
       <td>{{$product->status()}}</td>
       <td> 
