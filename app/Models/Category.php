@@ -35,13 +35,13 @@ class Category extends Model
 
     public function getThumbImage()
     {
-        return $this->image ? url('storage/thumb/' . $this->image) : '/images/logo.png';
+        return $this->image ? asset('storage/thumb/' . $this->image) : '/images/logo.png';
     }
 
 
     public function getImage()
     {
-        return url('storage/images/' . $this->image);
+        return asset('storage/images/' . $this->image);
     }
 
 

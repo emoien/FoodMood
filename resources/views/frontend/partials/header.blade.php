@@ -8,7 +8,7 @@
                         <!-- Logo -->
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
                             <div class="logo">
-                                <a href="{{route('welcome')}}"><img src="{{asset('images/logo.png')}}" style="height:50px; width:50px;" alt=""></a>
+                                <a href="{{route('welcome')}}"><img src="{{asset('Images/logo.png')}}" style="height:50px; width:50px;" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">

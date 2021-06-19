@@ -27,11 +27,14 @@
                                 <li><a href="{{route('about')}}">About</a></li>
                                <li><a href="{{route('contact')}}">  Contact Us</a></li>
                                <li><a href="{{route('covid')}}">Response To Covid-19</a></li>
+
+                               @guest
+                               <li><a href="{{route('upgrade')}}">Become Chef?</a></li>
+                               @endif
                                @if(auth()->user() && auth()->user()->role==0)
                                <li><a href="{{route('upgrade')}}">Become Chef?</a></li>
-                              @else
-                               <li><a href="{{route('upgrade')}}">Become Chef?</a></li>
-                                @endif
+                              @endif
+                              
                             </ul>
                         </div>
                     </div>
