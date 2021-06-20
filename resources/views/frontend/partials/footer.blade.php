@@ -66,10 +66,10 @@
                     <div class="footer-copy-right f-right">
                         <!-- social -->
                         <div class="footer-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="https://www.instagram.com/FoodMOOD.n"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100069619604759"><i class="fab fa-facebook-f"></i></a>
+                            <a href="mailto:foodmoodstore@gmail.com"><i class="fab fa-google"></i></a>
+                            
                         </div>
                     </div>
                 </div>

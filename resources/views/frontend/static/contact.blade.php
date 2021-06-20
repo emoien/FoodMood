@@ -73,7 +73,7 @@
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
-                                <h3>support@foodmood.com.au</h3>
+                                <h3>foodmoodstore@gmail.com</h3>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>

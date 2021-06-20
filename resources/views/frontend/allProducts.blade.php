@@ -26,6 +26,7 @@
                 </div>
             </div>
             <div class="row">
+                
                 @foreach($products as $product)
                     <div class="col-xl-3 col-lg-6">
                         <div class="single-category mb-30">

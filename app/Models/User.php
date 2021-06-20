@@ -91,13 +91,13 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->where('status', '!=', 0);
     }
 
     public function getImage()
     {
         
-         return $this->image ?  url('storage/user_image/' . $this->image) : url('images/chef.png');
+         return $this->image ?  url('storage/user_image/' . $this->image) : url('Images/chef.png');
     }
 
 
@@ -106,7 +106,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function adminlte_image()
     
     {
-        return $this->image ?  url('storage/user_image/' . $this->image) : url('images/logo.png');
+        return $this->image ?  url('storage/user_image/' . $this->image) : url('Images/logo.png');
     }
 
     public function adminlte_profile_url()
@@ -141,4 +141,5 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->role == 1 || $this->role == 2; 
     }
 
+    
 }

@@ -11,7 +11,7 @@
                                 <a href="{{route('welcome')}}"><img src="{{asset('Images/logo.png')}}" style="height:50px; width:50px;" alt=""></a>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
+                        <div class="col-xl-7 col-lg-9 col-md-7 col-sm-5">
                             <!-- Main-menu -->
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
@@ -23,14 +23,22 @@
                                         <li><a href="{{route('contact')}}">Contact Us</a></li>
                                         <li><a href="{{route('faq')}}">FAQ</a></li>
                                         
-                                       
+                                        @guest
+                                @if(Request::segment(1) != 'checkout')
+                                <li > <a href="{{route('login')}}" style="font-size: 18px; color: blue; font-weight: 600;" >Sign in</a></li>
+                                <li > <a href="{{route('register')}}" style="font-size: 18px; color: blue; font-weight: 600;" >Register</a></li>
+                                @endif
+                                @else
+                                <li > <a href="{{route('dashboard')}}" style="font-size: 18px; color: blue; font-weight: 600;">Dashboard</a></li>
+
+                                @endguest
 
                                         
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+                        <div class="col-xl-4 col-lg-2 col-md-2 col-sm-2 fix-card">
                             <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                 
                                 <li>
@@ -38,15 +46,7 @@
                                         <a href="{{route('cart.view')}}"><i class="fas fa-shopping-cart"></i></a>
                                     </div>
                                 </li>
-                                @guest
-                                @if(Request::segment(1) != 'checkout')
-                                <li class="d-none d-lg-block"> <a href="{{route('login')}}" class="btn header-btn">Sign in</a></li>
-                                <li class="d-none d-lg-block"> <a href="{{route('register')}}" class="btn header-btn">Register</a></li>
-                                @endif
-                                @else
-                                <li class="d-none d-lg-block"> <a href="{{route('dashboard')}}" class="btn header-btn">Dashboard</a></li>
-
-                                @endguest
+                               
                             </ul>
                         </div>
                         <!-- Mobile Menu -->
